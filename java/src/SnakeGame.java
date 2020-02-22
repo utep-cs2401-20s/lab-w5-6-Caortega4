@@ -84,14 +84,64 @@ public class SnakeGame {
 
     }
 
-    /*
     public int[] findTailRecursive(){
-        int length = 0;
-        length++;
-        resetCounters();
+        return findTailRecursive(headPosition, headPosition);
+    }
+
+
+    private int[] findTailRecursive(int[] currentPosition, int[] previousPosition){
+
+
+        int[] nextPosition = new int [2];
+
+
+        int prevRow = currentPosition[0] - 1;
+        int prevCol = currentPosition[1] - 1;
+        int nextCol = currentPosition[1] + 1;
+        int nextRow = currentPosition[0] + 1;
+        int xCoordinate = currentPosition[0];
+        int yCoordinate = currentPosition[1];
+
+
+        if (xCoordinate != 0) {
+            if ((game[prevRow][yCoordinate] == true) && ((prevRow != previousPosition[0]) && (yCoordinate != previousPosition[1]))) {
+                nextPosition[0] = prevRow;
+                return findTailRecursive(nextPosition, currentPosition);
+            }
+        }
+
+        if (yCoordinate != 0) {
+            if ((game[xCoordinate][prevCol] == true) && (( xCoordinate != headPosition[0]) && ( prevCol != headPosition[1]))){}
+                nextPosition[1] = prevCol;
+                return findTailRecursive(nextPosition, currentPosition);
+
+        }
+
+        if (yCoordinate != game.length - 1) {
+            if ((game[xCoordinate][nextCol] == true) && (( xCoordinate != headPosition[0]) && (nextCol != headPosition[1]))){
+                nextPosition[1] = nextCol;
+                return findTailRecursive(nextPosition, currentPosition);
+            }
+        }
+
+        if (xCoordinate != game.length - 1) {
+            if ((game[nextRow][yCoordinate] == true) && ((nextRow != headPosition[0]) && (yCoordinate != headPosition[1]))){
+                nextPosition[0] = nextRow;
+                return findTailRecursive(nextPosition, currentPosition);
+            }
+        }
+
+        if ((currentPosition[0] == headPosition[0]) && (currentPosition[1] == headPosition[1])) {
+             return findTailRecursive();
+        }
+
+
+        int[] outArray = {currentPosition[0], currentPosition[1], recursiveChecks};
+        return outArray;
+
 
     }
-    */
+
 
 
     private void resetCounters(){
