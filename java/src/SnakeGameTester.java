@@ -17,7 +17,7 @@ public class SnakeGameTester {
         };
 
         SnakeGame test = new SnakeGame(testArr, new int[]{0, 3});
-        Assert.assertArrayEquals(new int[]{3, 4, 5}, test.findTailExhaustive());
+        Assert.assertArrayEquals(new int[]{3, 4, 5}, test.findTailRecursive());
     }
 
 

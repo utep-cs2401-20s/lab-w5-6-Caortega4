@@ -26,6 +26,7 @@ public class SnakeGame {
 
     public int[] findTailExhaustive() {
         resetCounters();
+        int countChecks = 0;
         int count = 0;
         int length = 0;
         int prevRow;
@@ -35,7 +36,7 @@ public class SnakeGame {
         int[] outArray = new int[3];
         for (int i = 0; i < game.length; i++) {
             for (int j = 0; j < game[i].length; j++) {
-                exhaustiveChecks++;
+                countChecks++;
                 //If the cell is false, jump to the next cell
                 if (!game[i][j]) continue;
 
@@ -67,6 +68,7 @@ public class SnakeGame {
                 }
 
                 if (count == 1 && (i != headPosition[0] && j != headPosition[1])) {
+                    exhaustiveChecks = countChecks ;
                     outArray[0] = i;
                     outArray[1] = j;
                 }
@@ -96,6 +98,11 @@ public class SnakeGame {
 
         int[] nextPosition = new int [2];
 
+        for (int i = 0; i < currentPosition.length; i++) {
+            nextPosition[i] = currentPosition[i];
+        }
+
+
 
         int prevRow = currentPosition[0] - 1;
         int prevCol = currentPosition[1] - 1;
@@ -107,45 +114,38 @@ public class SnakeGame {
 
         if (xCoordinate != 0) {
             //Looks up
-            if ((game[prevRow][yCoordinate] == true) && (prevRow != previousPosition[0]) ) {
+            if ((game[prevRow][yCoordinate]) && (prevRow != previousPosition[0]) ) {
                 nextPosition[0] = prevRow;
                 return findTailRecursive(nextPosition, currentPosition);
             }
-        }
-
-        if (yCoordinate != 0) {
+        }else if (yCoordinate != 0) {
             //Looks left
-            if ((game[xCoordinate][prevCol] == true) && (  prevCol != previousPosition[1])){}
-            nextPosition[1] = prevCol;
-            return findTailRecursive(nextPosition, currentPosition);
+            if ((game[xCoordinate][prevCol]) && (  prevCol != previousPosition[1])) {
+                nextPosition[1] = prevCol;
+                return findTailRecursive(nextPosition, currentPosition);
+            }
 
-        }
-
-        if (yCoordinate != game.length - 1) {
+        }else if (yCoordinate != game.length - 1) {
             //Looks right
-            if ((game[xCoordinate][nextCol] == true) && (nextCol != previousPosition[1])){
+            if ((game[xCoordinate][nextCol]) && (nextCol != previousPosition[1])){
                 nextPosition[1] = nextCol;
                 return findTailRecursive(nextPosition, currentPosition);
             }
-        }
-
-        if (xCoordinate != game.length - 1) {
+        }else if (xCoordinate != game.length - 1) {
             //Looks Down
-            if ((game[nextRow][yCoordinate] == true) && ((nextRow != previousPosition[0]) )){
+            if ((game[nextRow][yCoordinate]) && ((nextRow != previousPosition[0]) )){
                 nextPosition[0] = nextRow;
                 return findTailRecursive(nextPosition, currentPosition);
             }
-        }
+        }else if((currentPosition[0] == headPosition[0]) && (currentPosition[1] == headPosition[1])){
+                findTailRecursive(headPosition, headPosition);
+            }
 
         if ((currentPosition[0] == headPosition[0]) && (currentPosition[1] == headPosition[1])) {
-            return findTailRecursive();
+                        return findTailRecursive();
+
         }
-
-
-        int[] outArray = {nextPosition[0], nextPosition[1], recursiveChecks};
-        return outArray;
-
-
+        return findTailRecursive(currentPosition, previousPosition);
     }
 
 
