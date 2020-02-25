@@ -111,41 +111,36 @@ public class SnakeGame {
         int xCoordinate = currentPosition[0];
         int yCoordinate = currentPosition[1];
 
-
-        if (xCoordinate != 0) {
+        if((headPosition[0] == currentPosition[0] && headPosition[1] == currentPosition[1]) && (previousPosition [0] != headPosition[0] && previousPosition[1] != headPosition[1])){
+            return findTailRecursive(headPosition, headPosition);
+        }if (xCoordinate != 0) {
             //Looks up
             if ((game[prevRow][yCoordinate]) && (prevRow != previousPosition[0]) ) {
                 nextPosition[0] = prevRow;
                 return findTailRecursive(nextPosition, currentPosition);
             }
-        }else if (yCoordinate != 0) {
+        }if (yCoordinate != 0) {
             //Looks left
             if ((game[xCoordinate][prevCol]) && (  prevCol != previousPosition[1])) {
                 nextPosition[1] = prevCol;
                 return findTailRecursive(nextPosition, currentPosition);
             }
 
-        }else if (yCoordinate != game.length - 1) {
+        }if (yCoordinate != game.length - 1) {
             //Looks right
             if ((game[xCoordinate][nextCol]) && (nextCol != previousPosition[1])){
                 nextPosition[1] = nextCol;
                 return findTailRecursive(nextPosition, currentPosition);
             }
-        }else if (xCoordinate != game.length - 1) {
+        }if (xCoordinate != game[0].length - 1) {
             //Looks Down
             if ((game[nextRow][yCoordinate]) && ((nextRow != previousPosition[0]) )){
                 nextPosition[0] = nextRow;
                 return findTailRecursive(nextPosition, currentPosition);
             }
-        }else if((currentPosition[0] == headPosition[0]) && (currentPosition[1] == headPosition[1])){
-                findTailRecursive(headPosition, headPosition);
-            }
-
-        if ((currentPosition[0] == headPosition[0]) && (currentPosition[1] == headPosition[1])) {
-                        return findTailRecursive();
-
         }
-        return findTailRecursive(currentPosition, previousPosition);
+            return currentPosition;
+
     }
 
 
