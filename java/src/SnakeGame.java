@@ -52,23 +52,29 @@ public class SnakeGame {
 
 
                 if (i != 0) {
-                    if (game[prevRow][j] == true) count++;
+                    if (game[prevRow][j]) count++;
                 }
 
                 if (j != 0) {
-                    if (game[i][prevCol] == true) count++;
+                    if (game[i][prevCol]) count++;
                 }
 
                 if (j != game.length - 1) {
-                    if (game[i][nextCol] == true) count++;
+                    if (game[i][nextCol]) count++;
                 }
 
                 if (i != game.length - 1) {
-                    if (game[nextRow][j] == true) count++;
+                    if (game[nextRow][j]) count++;
                 }
 
-                if (count == 1 && (i != headPosition[0] && j != headPosition[1])) {
+                if (count == 1 && (i != headPosition[0] || j != headPosition[1])) {
                     exhaustiveChecks = countChecks ;
+                    outArray[0] = i;
+                    outArray[1] = j;
+                }
+
+                if (count == 0){
+                    exhaustiveChecks = countChecks;
                     outArray[0] = i;
                     outArray[1] = j;
                 }
@@ -139,6 +145,7 @@ public class SnakeGame {
             if ((game[nextRow][yCoordinate]) && ((nextRow != previousPosition[0]) )){
                 nextPosition[0] = nextRow;
                 return findTailRecursive(nextPosition, currentPosition);
+
             }
         }
             return currentPosition;
