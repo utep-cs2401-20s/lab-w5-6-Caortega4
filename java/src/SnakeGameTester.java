@@ -17,21 +17,22 @@ public class SnakeGameTester {
         };
 
         SnakeGame test = new SnakeGame(testArr, new int[]{3, 4});
-        Assert.assertArrayEquals(new int[]{1, 3, 4}, test.findTailRecursive());
+        Assert.assertArrayEquals(new int[]{1, 3, 4}, test.findTailExhaustive());
+        System.out.println(test.getExhaustiveChecks());
+
     }
 
     @Test
     public void testSnakeGame2(){
         boolean[][] testArr = {
-                {false, false,false, false, false},
-                {false, false,false, true, false},
-                {false, false,false, true, false},
-                {false, false,false, true, true},
-                {false, false,false, false, false},
+                {false, false, false},
+                {true, true,true},
+                {false, false,false},
+
         };
 
-        SnakeGame test = new SnakeGame(testArr, new int[]{3, 4});
-        Assert.assertArrayEquals(new int[]{1, 3}, test.findTailRecursive());
+        SnakeGame test = new SnakeGame(testArr, new int[]{1, 1});
+        Assert.assertArrayEquals(new int[]{0, 2, 3}, test.findTailExhaustive());
     }
 
     @Test
@@ -45,7 +46,9 @@ public class SnakeGameTester {
         };
 
         SnakeGame test = new SnakeGame(testArr, new int[]{3, 4});
-        Assert.assertArrayEquals(new int[]{1, 3}, test.findTailRecursive());
+        Assert.assertArrayEquals(new int[]{1, 3, 4}, test.findTailRecursive());
+        System.out.println(test.getRecursiveChecks());
+
     }
 
     @Test
