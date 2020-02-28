@@ -26,7 +26,7 @@ public class SnakeGameTester {
     }
 
     @Test
-    //Tests both findTail methods on a straight snake
+    //Tests both findTail methods on a straight snake, where the head and the tail have one coordinate in common
     public void testSnakeGame2(){
         boolean[][] testArr = {
                 {false, false, false},
@@ -41,7 +41,7 @@ public class SnakeGameTester {
     }
 
     @Test
-    //Tests exhaustive and recursive checks
+    //Tests exhaustive and recursive checks for a normal case
     public void testSnakeGame3(){
         boolean[][] testArr = {
                 {false, false,true, false, false},
@@ -61,7 +61,7 @@ public class SnakeGameTester {
     }
 
     @Test
-    //Tests recursive and exhaustive checks
+    //Tests recursive and exhaustive checks on a very long snake
     public void testSnakeGame4(){
         boolean[][] testArr = {
                 {true, true, true, true, true},
@@ -79,6 +79,8 @@ public class SnakeGameTester {
     }
 
     @Test
+
+    //General test that will check the behaviour of the find methods where the head is the same as the tail
     public void testSnakeGame5(){
         boolean[][] testArr = {
                 {false, false,false, false, false},
